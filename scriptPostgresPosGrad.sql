@@ -779,7 +779,7 @@ SELECT
 	CASE WHEN extract(isodow from datum) in (6, 7) THEN 'Final de Semana' ELSE 'Dia da Semana' END AS FinalSemana,
 	-- Fixed holidays 
         -- for Brasil
-        CASE WHEN to_char(datum, 'DDMM') IN ('0101', '2104', '0105',  '0709', '1225')
+        CASE WHEN to_char(datum, 'DDMM') IN ('0101', '2104', '0105',  '0709', '2512')
 		THEN 'Feriado' ELSE 'Dia útil' END
 		AS Feriado,    
 	-- ISO start and end of the week of this date
