@@ -259,7 +259,7 @@ SELECT
 	(datum + (1 - extract(day from datum))::integer + '1 month'::interval)::date - '1 day'::interval AS FimMes
 FROM (
 	-- There are 3 leap years in this range, so calculate 365 * 10 + 3 records
-	SELECT '2022-01-01'::DATE + sequence.day AS datum
+	SELECT '2020-01-01'::DATE + sequence.day AS datum
 	FROM generate_series(0,3652) AS sequence(day)
 	GROUP BY sequence.day
      ) DQ
