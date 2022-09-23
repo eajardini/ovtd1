@@ -418,6 +418,15 @@ group by 1
 ;
 
 
+-- Consulta para subir os dados de ovdt1_erp para o Data Studio
+select  ped.num_pedido, cli.nome_cliente, cli.cidade, cli.uf, ven.nome_vendedor, ped.data_pedido,
+                pro.codigo_produto, ip.quantidade, ip.valor_custo, ip.valor_venda
+                        from cliente cli, vendedor ven, pedido ped, item_pedido ip, produto pro
+                        where cli.codigo_cliente = ped.codigo_cliente
+                        and ven.codigo_vendedor = ped.codigo_vendedor
+                        and ped.num_pedido = ip.num_pedido
+                        and ip.codigo_produto = pro.codigo_produto;  
+
 
 --select * from bi_cliente
 --where nome_cliente like 'Jos%';
