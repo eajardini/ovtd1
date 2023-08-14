@@ -1,20 +1,34 @@
+/*
+1)Para cada usuário que irá se conectar remotamente ao servidor do professor, deverá ser criado um usuário e um schema para ele. Quem for usar seu notebook ou os micros do laboratório, não há necessidade de se criar usuário.
+1.1) CREATE USER usuario WITH ENCRYPTED PASSWORD 'postdba';
+
+2) O usuário remoto deverá adicionar o SCHEMA com seu nome antes de CRIAR uma tabela assim:
+   create table usuario.cliente (.....);
+   
+3) O usuário remoto deverá adicionar o SCHEMA com seu nome antes de PROJETAR uma tabela assim:
+   select * from  usuario.cliente;
+   
+4) Somente use as linhas abaixo caso haja usuários remotos
+-- CREATE SCHEMA usuario AUTHORIZATION usuario;
+*/
+
 -- Cria banco de dados do ERP
-CREATE DATABASE ovdt1_erp
+CREATE DATABASE ovtd1_erp
     WITH 
     OWNER = postgres
     ENCODING = 'UTF8'    
     CONNECTION LIMIT = -1;
     
-ALTER DATABASE ovdt1_erp SET datestyle TO 'SQL, DMY';
+ALTER DATABASE ovtd1_erp SET datestyle TO 'SQL, DMY';
     
 -- Cria banco de dados do DW
-CREATE DATABASE ovdt1_dw
+CREATE DATABASE ovtd1_dw
     WITH 
     OWNER = postgres
     ENCODING = 'UTF8'    
     CONNECTION LIMIT = -1;
 
-ALTER DATABASE ovdt1_dw SET datestyle TO 'SQL, DMY';
+ALTER DATABASE ovtd1_dw SET datestyle TO 'SQL, DMY';
 
 -- Passo ERP1 - Criação das tabelas
 
@@ -219,7 +233,7 @@ SELECT listaNumPedido[1 + mod(ip, array_length(listaNumPedido, 1))],
 	   listaValorVenda[1 + mod(ip, array_length(listaValorVenda, 1))],	   
 	   listaValorCusto[1 + mod(ip, array_length(listaValorCusto, 1))]	 
 FROM numPedido_list, codProduto_list, qtade_list, valorVenda_list, 
-     valorCusto_list, generate_series(1000,1000000) ip
+     valorCusto_list, generate_series(1000,2000000) ip
 --limit 10
 ;
 
