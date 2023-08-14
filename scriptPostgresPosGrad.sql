@@ -233,7 +233,7 @@ SELECT listaNumPedido[1 + mod(ip, array_length(listaNumPedido, 1))],
 	   listaValorVenda[1 + mod(ip, array_length(listaValorVenda, 1))],	   
 	   listaValorCusto[1 + mod(ip, array_length(listaValorCusto, 1))]	 
 FROM numPedido_list, codProduto_list, qtade_list, valorVenda_list, 
-     valorCusto_list, generate_series(1000,2000000) ip
+     valorCusto_list, generate_series(1000,200000) ip
 --limit 10
 ;
 
