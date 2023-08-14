@@ -239,6 +239,7 @@ FROM numPedido_list, codProduto_list, qtade_list, valorVenda_list,
 
 -----------------------------------------------------------
 
+
 --Passo DW1 - Cria dimensao tempo
 
 set lc_time  TO 'pt_BR.UTF-8';
@@ -273,7 +274,7 @@ SELECT
 	(datum + (1 - extract(day from datum))::integer + '1 month'::interval)::date - '1 day'::interval AS FimMes
 FROM (
 	-- There are 3 leap years in this range, so calculate 365 * 10 + 3 records
-	SELECT '2020-01-01'::DATE + sequence.day AS datum
+	SELECT '2022-01-01'::DATE + sequence.day AS datum
 	FROM generate_series(0,3652) AS sequence(day)
 	GROUP BY sequence.day
      ) DQ
@@ -292,7 +293,7 @@ CREATE EXTENSION dblink;
 create materialized view bi_dcliente
 as
 SELECT * 
-FROM dblink('host=localhost user=postgres password=postdba dbname=ovdt1_erp','select * from cliente')
+FROM dblink('host=172.17.0.1 user=postgres password=postdba dbname=ovtd1_erp','select * from cliente')
   AS     minhaView(
   	  codigo_cliente  bigint, 
 	  nome_cliente   character varying(40),
@@ -315,7 +316,7 @@ CREATE EXTENSION dblink;
 create materialized view bi_dpedido
 as
 SELECT *
-FROM dblink('host=localhost user=postgres password=postdba dbname=ovdt1_erp','select * from pedido')
+FROM dblink('host=172.17.0.1 user=postgres password=postdba dbname=ovtd1_erp','select * from pedido')
   AS     minhaView(
     num_pedido bigint ,						
  	prazo_entrega numeric(3,0) 	,			
@@ -335,7 +336,7 @@ CREATE EXTENSION dblink;
 create materialized view bi_dproduto
 as
 SELECT *
-FROM dblink('host=localhost user=postgres password=postdba dbname=ovdt1_erp','select * from produto')
+FROM dblink('host=172.17.0.1 user=postgres password=postdba dbname=ovtd1_erp','select * from produto')
  AS     minhaView(
         codigo_produto    bigint,
         unidade           character(3),
@@ -357,7 +358,7 @@ CREATE EXTENSION dblink;
 create materialized view bi_dvendedor
 as
 SELECT *
-FROM dblink('host=localhost user=postgres password=postdba dbname=ovdt1_erp','select * from vendedor')
+FROM dblink('host=172.17.0.1 user=postgres password=postdba dbname=ovtd1_erp','select * from vendedor')
  AS minhaView(
     codigo_vendedor  bigint,
     nome_vendedor    character varying(40),
@@ -376,7 +377,7 @@ create index idx_codigovendedor on bi_dvendedor (codigo_vendedor);
 create materialized view bi_fitempedido
 as
 SELECT * 
-FROM dblink('host=localhost user=postgres password=postdba dbname=ovdt1_erp',
+FROM dblink('host=172.17.0.1 user=postgres password=postdba dbname=ovtd1_erp',
 			'
 			select  ped.num_pedido, ped.codigo_cliente, ped.codigo_vendedor, ped.data_pedido,
         	pro.codigo_produto,
@@ -408,8 +409,10 @@ create index idx_codigoproduto_fip on bi_fitempedido (codigo_produto);
 REFRESH MATERIALIZED VIEW bi_dcliente;
 REFRESH MATERIALIZED VIEW bi_dpedido;
 REFRESH MATERIALIZED VIEW bi_dvendedor;
-REFRESH MATERIALIZED VIEW bi_droduto;
+REFRESH MATERIALIZED VIEW bi_dproduto;
 REFRESH MATERIALIZED VIEW bi_fitempedido;
+ 
+
  
 
 
