@@ -1,6 +1,13 @@
 /*
 1)Para cada usuário que irá se conectar remotamente ao servidor do professor, deverá ser criado um usuário e um schema para ele. Quem for usar seu notebook ou os micros do laboratório, não há necessidade de se criar usuário.
-1.1) CREATE USER usuario WITH ENCRYPTED PASSWORD 'postdba';
+1.1) CREATE USER ovdt_user1 WITH ENCRYPTED PASSWORD 'postdba';
+     CREATE USER ovdt_user2 WITH ENCRYPTED PASSWORD 'postdba';
+-- Dentro do database ovdt1_dw
+1.2) CREATE SCHEMA ovdt_user1 AUTHORIZATION ovdt_user1;
+     CREATE SCHEMA ovdt_user2 AUTHORIZATION ovdt_user2;	
+-- Dentro do database ovdt1_erp
+1.3) GRANT ALL PRIVILEGES ON ALL TABLES IN SCHEMA public to ovdt_user1;
+     GRANT ALL PRIVILEGES ON ALL TABLES IN SCHEMA public to ovdt_user2;
 
 2) O usuário remoto deverá adicionar o SCHEMA com seu nome antes de CRIAR uma tabela assim:
    create table usuario.cliente (.....);
@@ -8,8 +15,7 @@
 3) O usuário remoto deverá adicionar o SCHEMA com seu nome antes de PROJETAR uma tabela assim:
    select * from  usuario.cliente;
    
-4) Somente use as linhas abaixo caso haja usuários remotos
--- CREATE SCHEMA usuario AUTHORIZATION usuario;
+
 */
 
 -- Cria banco de dados do ERP
