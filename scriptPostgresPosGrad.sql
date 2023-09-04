@@ -14,7 +14,8 @@
    
 3) O usuário remoto deverá adicionar o SCHEMA com seu nome antes de PROJETAR uma tabela assim:
    select * from  usuario.cliente;
-   
+
+4) No PDI SPOON qunado for escolher o destino, geralmente mo componente Dimension Lookup/Update, selecionar o schema ovdt_userN
 
 */
 
