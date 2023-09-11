@@ -540,11 +540,11 @@
   <order>
     <hop>
       <from>Carregar dados de ItemPedido</from>
-      <to>Encontrar a data do pedido</to>
+      <to>Encontrar a dados do pedido</to>
       <enabled>Y</enabled>
     </hop>
     <hop>
-      <from>Encontrar a data do pedido</from>
+      <from>Encontrar a dados do pedido</from>
       <to>Encontrar SK de dClientes</to>
       <enabled>Y</enabled>
     </hop>
@@ -859,7 +859,7 @@
     </GUI>
   </step>
   <step>
-    <name>Encontrar a data do pedido</name>
+    <name>Encontrar a dados do pedido</name>
     <type>DBLookup</type>
     <description/>
     <distribute>Y</distribute>
@@ -957,52 +957,42 @@
       <field>
         <name>quantidade</name>
         <lookup>quantidade</lookup>
-        <update>Insert</update>
+        <update>Punch through</update>
       </field>
       <field>
         <name>valor_venda</name>
         <lookup>valor_venda</lookup>
-        <update>Insert</update>
+        <update>Punch through</update>
       </field>
       <field>
         <name>valor_custo</name>
         <lookup>valor_custo</lookup>
-        <update>Insert</update>
+        <update>Punch through</update>
       </field>
       <field>
         <name>prazo_entrega</name>
         <lookup>prazo_entrega</lookup>
-        <update>Insert</update>
-      </field>
-      <field>
-        <name>codigo_cliente</name>
-        <lookup>codigo_cliente</lookup>
-        <update>Insert</update>
-      </field>
-      <field>
-        <name>codigo_vendedor</name>
-        <lookup>codigo_vendedor</lookup>
-        <update>Insert</update>
+        <update>Punch through</update>
       </field>
       <field>
         <name>data_pedido</name>
         <lookup>data_pedido</lookup>
-        <update>Insert</update>
+        <update>Punch through</update>
       </field>
       <field>
         <name>dcliente_sk</name>
         <lookup>dcliente_sk</lookup>
-        <update>Insert</update>
+        <update>Punch through</update>
       </field>
       <field>
         <name>dvendedor_sk</name>
         <lookup>dvendedor_sk</lookup>
-        <update>Insert</update>
+        <update>Punch through</update>
       </field>
       <field>
         <name>dproduto_sk</name>
         <lookup>dproduto_sk</lookup>
-        <update>Insert</update>
+        <update>Punch through</update>
       </field>
       <return>
         <name>fpedido_sk</name>
